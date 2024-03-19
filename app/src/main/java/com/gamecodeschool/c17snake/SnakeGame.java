@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -14,6 +15,7 @@ import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import androidx.core.content.res.ResourcesCompat;
 import java.io.IOException;
 
 class SnakeGame extends SurfaceView implements Runnable {
@@ -42,6 +44,7 @@ class SnakeGame extends SurfaceView implements Runnable {
     private Canvas mCanvas;
     private SurfaceHolder mSurfaceHolder;
     private Paint mPaint;
+    private Typeface mAtariFont;
 
     // A snake ssss
     private Snake mSnake;
@@ -91,6 +94,7 @@ class SnakeGame extends SurfaceView implements Runnable {
         // Initialize the drawing objects
         mSurfaceHolder = getHolder();
         mPaint = new Paint();
+        mAtariFont = ResourcesCompat.getFont(getContext(), R.font.atariclassic);
 
         // Call the constructors of our two game objects
         mApple = new Apple(context,
@@ -207,6 +211,8 @@ class SnakeGame extends SurfaceView implements Runnable {
             mPaint.setColor(Color.argb(255, 255, 255, 255));
             mPaint.setTextSize(120);
 
+            mPaint.setTypeface(mAtariFont);
+
             // Draw the score
             mCanvas.drawText("" + mScore, 20, 120, mPaint);
 
@@ -219,7 +225,7 @@ class SnakeGame extends SurfaceView implements Runnable {
 
                 // Set the size and color of the mPaint for the text
                 mPaint.setColor(Color.argb(255, 255, 255, 255));
-                mPaint.setTextSize(250);
+                mPaint.setTextSize(150);
 
                 // Draw the message
                 // We will give this an international upgrade soon
