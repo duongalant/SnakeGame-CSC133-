@@ -10,7 +10,7 @@ import android.graphics.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-class Apple implements Drawable, InSnake {
+class Apple extends GameObject implements InSnake {
 
     // The location of the apple on the grid
     // Not in pixels
@@ -53,21 +53,9 @@ class Apple implements Drawable, InSnake {
         Random random = new Random();
         location.x = random.nextInt(mSpawnRange.x) + 1;
         location.y = random.nextInt(mSpawnRange.y - 1) + 1;
-
+        //makes sure that the apple doesn't spawn in the snake, which would stop the apple from spawning.
+        //potential freeze if snake covers entire screen
         if(InSnake.checkSpot(segmentLocations, location, -1)) this.spawn(segmentLocations);
-    }
-
-    // Let SnakeGame know where the apple is
-    // SnakeGame can share this with the snake
-    Point getLocation(){
-        return location;
-    }
-
-    // Draw the apple
-    public void draw(Canvas canvas, Paint paint){
-        canvas.drawBitmap(mBitmapApple,
-                location.x * mSize, location.y * mSize, paint);
-
     }
 
 }
