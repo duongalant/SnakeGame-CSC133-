@@ -6,9 +6,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+
+import java.util.ArrayList;
 import java.util.Random;
 
-class Apple implements Drawable {
+class Apple implements Drawable, InSnake {
 
     // The location of the apple on the grid
     // Not in pixels
@@ -45,6 +47,14 @@ class Apple implements Drawable {
         Random random = new Random();
         location.x = random.nextInt(mSpawnRange.x) + 1;
         location.y = random.nextInt(mSpawnRange.y - 1) + 1;
+    }
+    void spawn(ArrayList<Point> segmentLocations){
+        // Choose two random values and place the apple
+        Random random = new Random();
+        location.x = random.nextInt(mSpawnRange.x) + 1;
+        location.y = random.nextInt(mSpawnRange.y - 1) + 1;
+
+        if(InSnake.checkSpot(segmentLocations, location, -1)) this.spawn(segmentLocations);
     }
 
     // Let SnakeGame know where the apple is

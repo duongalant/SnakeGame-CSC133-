@@ -11,10 +11,10 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-class Snake implements Drawable {
+class Snake implements Drawable, InSnake {
 
     // The location in the grid of all the segments
-    private ArrayList<Point> segmentLocations;
+    public ArrayList<Point> segmentLocations;
 
     // How big is each segment of the snake?
     private int mSegmentSize;
@@ -176,7 +176,7 @@ class Snake implements Drawable {
 
             dead = true;
         }
-
+        /*
         // Eaten itself?
         for (int i = segmentLocations.size() - 1; i > 0; i--) {
             // Have any of the sections collided with the head
@@ -186,6 +186,9 @@ class Snake implements Drawable {
                 dead = true;
             }
         }
+        */
+        if(InSnake.checkSpot(segmentLocations, segmentLocations.get(0))) dead = true;
+
         return dead;
     }
 
