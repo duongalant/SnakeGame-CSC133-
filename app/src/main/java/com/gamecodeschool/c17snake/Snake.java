@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-class Snake extends GameObject implements Drawable, InSnake {
+class Snake extends GameObject implements InSnake {
 
     // The location in the grid of all the segments
     public ArrayList<Point> segmentLocations;
