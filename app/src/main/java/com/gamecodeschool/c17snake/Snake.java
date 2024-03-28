@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-class Snake implements Drawable, InSnake {
+class Snake extends GameObject implements InSnake {
 
     // The location in the grid of all the segments
     public ArrayList<Point> segmentLocations;
@@ -176,17 +176,7 @@ class Snake implements Drawable, InSnake {
 
             dead = true;
         }
-        /*
-        // Eaten itself?
-        for (int i = segmentLocations.size() - 1; i > 0; i--) {
-            // Have any of the sections collided with the head
-            if (segmentLocations.get(0).x == segmentLocations.get(i).x &&
-                    segmentLocations.get(0).y == segmentLocations.get(i).y) {
-
-                dead = true;
-            }
-        }
-        */
+        //check if it eats itself
         if(InSnake.checkSpot(segmentLocations, segmentLocations.get(0))) dead = true;
 
         return dead;
