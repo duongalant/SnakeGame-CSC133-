@@ -8,9 +8,11 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.view.MotionEvent;
+
 import java.util.ArrayList;
 
-class Snake implements InSnake {
+class Snake extends GameObject implements InSnake {
+
     // The location in the grid of all the segments
     public ArrayList<Point> segmentLocations;
 
@@ -206,6 +208,7 @@ class Snake implements InSnake {
         return false;
     }
 
+    @Override
     public void draw(Canvas canvas, Paint paint) {
 
         // Don't run this code if ArrayList has nothing in it
