@@ -271,20 +271,23 @@ class SnakeGame extends SurfaceView implements Runnable {
             mPaused = !mPaused;
             return true;
         }
-
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
                 if (mPaused) {
                     mPaused = false;
                     newGame();
+
                     // Don't want to process snake direction for this tap
                     return true;
                 }
+
                 // Let the Snake class handle the input
                 mSnake.switchHeading(motionEvent);
                 break;
+
             default:
                 break;
+
         }
         return true;
     }
