@@ -6,18 +6,21 @@ import android.graphics.Paint;
 import android.graphics.Point;
 
 public class GameObject {
+    public Point location = new Point();
 
-    protected Point location = new Point();
-    protected int mSize;
-    protected Bitmap mBitmap;
-    void draw(Canvas canvas, Paint paint){
-        canvas.drawBitmap(mBitmap,
-                location.x * mSize, location.y * mSize, paint);
+    public int mSize;
 
-    }
+    // An image to represent the apple
+    public Bitmap mBitmap;
 
     Point getLocation(){
         return location;
     }
 
+    // Draw the apple
+    public void draw(Canvas canvas, Paint paint){
+        canvas.drawBitmap(mBitmap,
+                location.x * mSize, location.y * mSize, paint);
+
+    }
 }
