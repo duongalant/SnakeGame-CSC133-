@@ -10,20 +10,11 @@ import android.graphics.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-class Apple implements Drawable, InSnake {
-
-    // The location of the apple on the grid
-    // Not in pixels
-    private Point location = new Point();
+class Apple extends GameObject implements Drawable, InSnake {
 
     // The range of values we can choose from
     // to spawn an apple
     private Point mSpawnRange;
-    private int mSize;
-
-    // An image to represent the apple
-    private Bitmap mBitmapApple;
-
     /// Set up the apple in the constructor
     Apple(Context context, Point sr, int s){
 
@@ -35,10 +26,10 @@ class Apple implements Drawable, InSnake {
         location.x = -10;
 
         // Load the image to the bitmap
-        mBitmapApple = BitmapFactory.decodeResource(context.getResources(), R.drawable.apple);
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.apple);
 
         // Resize the bitmap
-        mBitmapApple = Bitmap.createScaledBitmap(mBitmapApple, s, s, false);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, s, s, false);
     }
 
     // This is called every time an apple is eaten
@@ -57,6 +48,7 @@ class Apple implements Drawable, InSnake {
         if(InSnake.checkSpot(segmentLocations, location, -1)) this.spawn(segmentLocations);
     }
 
+    /*
     // Let SnakeGame know where the apple is
     // SnakeGame can share this with the snake
     Point getLocation(){
@@ -69,5 +61,7 @@ class Apple implements Drawable, InSnake {
                 location.x * mSize, location.y * mSize, paint);
 
     }
+
+     */
 
 }
