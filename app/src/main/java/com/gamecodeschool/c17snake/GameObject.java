@@ -10,7 +10,7 @@ public class GameObject {
 
     public int mSize;
 
-    // An image to represent the apple
+    // An image to represent the object
     public Bitmap mBitmap;
 
     Point getLocation(){
