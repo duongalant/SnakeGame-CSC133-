@@ -8,11 +8,9 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.view.MotionEvent;
-
 import java.util.ArrayList;
 
-class Snake extends GameObject implements InSnake {
-
+class Snake implements InSnake {
     // The location in the grid of all the segments
     public ArrayList<Point> segmentLocations;
 
@@ -176,7 +174,17 @@ class Snake extends GameObject implements InSnake {
 
             dead = true;
         }
-        //check if it eats itself
+        /*
+        // Eaten itself?
+        for (int i = segmentLocations.size() - 1; i > 0; i--) {
+            // Have any of the sections collided with the head
+            if (segmentLocations.get(0).x == segmentLocations.get(i).x &&
+                    segmentLocations.get(0).y == segmentLocations.get(i).y) {
+
+                dead = true;
+            }
+        }
+        */
         if(InSnake.checkSpot(segmentLocations, segmentLocations.get(0))) dead = true;
 
         return dead;
@@ -198,7 +206,6 @@ class Snake extends GameObject implements InSnake {
         return false;
     }
 
-    @Override
     public void draw(Canvas canvas, Paint paint) {
 
         // Don't run this code if ArrayList has nothing in it

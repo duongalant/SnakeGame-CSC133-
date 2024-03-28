@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Display;
 
 public class SnakeActivity extends Activity {
-
     // Declare an instance of SnakeGame
     SnakeGame mSnakeGame;
 

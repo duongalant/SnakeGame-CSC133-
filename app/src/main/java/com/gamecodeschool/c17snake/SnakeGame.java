@@ -19,7 +19,6 @@ import androidx.core.content.res.ResourcesCompat;
 import java.io.IOException;
 
 class SnakeGame extends SurfaceView implements Runnable {
-
     // Objects for the game loop/thread
     private Thread mThread = null;
     // Control pausing between updates
@@ -50,6 +49,7 @@ class SnakeGame extends SurfaceView implements Runnable {
     private Snake mSnake;
     // And an apple
     private Apple mApple;
+    private PauseButton pauseButton;
 
 
     // This is the constructor method that gets called
@@ -106,6 +106,15 @@ class SnakeGame extends SurfaceView implements Runnable {
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize);
+        // Calculate button size and position
+        int buttonSize = 100;
+        int buttonLeft = size.x - buttonSize - 20; // Adjust position as needed
+        int buttonTop = 450; // Adjust position as needed
+        int buttonRight = buttonLeft + buttonSize;
+        int buttonBottom = buttonTop + buttonSize;
+
+        // Create the pause button
+        pauseButton = new PauseButton(buttonLeft, buttonTop, buttonRight, buttonBottom);
 
     }
 
@@ -220,6 +229,8 @@ class SnakeGame extends SurfaceView implements Runnable {
             mApple.draw(mCanvas, mPaint);
             mSnake.draw(mCanvas, mPaint);
 
+            pauseButton.draw(mCanvas, mPaint);
+
             // Draw some text while paused
             if(mPaused){
 
@@ -250,23 +261,30 @@ class SnakeGame extends SurfaceView implements Runnable {
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
+        int touchX = (int) motionEvent.getX();
+        int touchY = (int) motionEvent.getY();
+
+        // Check if the touch event is within the pause button bounds
+        if (motionEvent.getAction() == MotionEvent.ACTION_UP &&
+                pauseButton.getButtonRect().contains(touchX, touchY)) {
+            // Toggle pause state
+            mPaused = !mPaused;
+            return true;
+        }
+
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
                 if (mPaused) {
                     mPaused = false;
                     newGame();
-
                     // Don't want to process snake direction for this tap
                     return true;
                 }
-
                 // Let the Snake class handle the input
                 mSnake.switchHeading(motionEvent);
                 break;
-
             default:
                 break;
-
         }
         return true;
     }
